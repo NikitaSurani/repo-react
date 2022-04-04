@@ -7,6 +7,7 @@ import logo from '../assets/img/logo-ct.png';
 import '../assets/css/dashcss.css';
 
 const Dashboard = () => {
+  const [data, setData] = useState();
   return (
     <aside className="sidenav navbar navbar-vertical navbar-expand-xs   fixed-start   bg-gradient-dark" id="sidenav-main">
       <div className="sidenav-header">

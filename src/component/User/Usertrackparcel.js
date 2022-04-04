@@ -8,7 +8,8 @@ import './usertrack.css'
 import { NavDropdown } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../services/getToken';
-import mainlogo1 from '../image/mainlogo.png'
+import mainlogo1 from '../image/mainlogo.png';
+const {BASE_URL}=process.env
 
 
 const Usertrackparcel = () => {
@@ -46,7 +47,7 @@ const Usertrackparcel = () => {
     }, [])
     const setcap = () => {
         const referancenumber = ref;
-        Axios.get(`http://localhost:8000/trackparcel/${referancenumber}`)
+        Axios.get(`${process.env.REACT_APP_BASE_URL}/trackparcel/${referancenumber}`)
             .then((res) => {
                 if (res.status == 400) {
                     Setreferr("Reference no. Not Exists")
@@ -78,7 +79,8 @@ const Usertrackparcel = () => {
         else {
             setcaptcha("");
             const referancenumber = ref;
-            Axios.get(`http://localhost:8000/trackparcel/${referancenumber}`)
+            
+            Axios.get(`${process.env.REACT_APP_BASE_URL}/trackparcel/${referancenumber}`)
                 .then((res) => {
                     if (res.status === 200) {
                         Setshow("show");
