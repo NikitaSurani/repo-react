@@ -1,0 +1,95 @@
+.mainlanding{
+    background-image: url('https://cdn.mindbowser.com/wp-content/uploads/2022/01/11125846/Global-Map-IMG-6.svg') !important;
+    min-height: 90vh !important;
+    width: 100% !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    opacity: 0.9;
+}
+.landing2{
+    display: flex;
+    justify-content: space-between;
+    /* background-color: black !important; */
+    background-color: #06649b !important;
+    height: 70px;
+    position: fixed;
+    top: 0;
+   overflow: hidden;
+    z-index: 999 !important;
+    width: 100%;
+    color: white !important;
+}
+
+
+
+/* sticky css */
+
+.landing2.sticky{
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0,0, 0, 0.1);
+}
+/* .landing2.sticky .userlogo1{
+    color: #111;
+} */
+
+
+
+
+.loguser{
+    height: 120px !important;
+    position: relative;
+    left: -10px !important;
+    top:-20px !important;
+}
+
+/* .usernav{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+    background-color: black;
+} */
+.has1{
+    display: inline-block;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white
+}
+.has1:hover{
+    color: orange;
+}
+.firsttxt{
+    padding-top: 120px !important;
+}
+.firsttxt .ftxtp{
+    color: rgb(210, 238, 52);
+    font-weight: bold;
+    font-size: 40px !important;
+    margin-top: -10px;
+}
+.firsttxt .ftxtp1{
+    color: rgb(216, 201, 189);
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 50px;
+}
+.trackpbtn{
+    border-radius: 2px;
+    border: 2px solid black;
+    width: 300px;
+    line-height: 50px;
+    margin-top: 40px;
+    font-size: 27px;
+    font-weight: bold;
+    color: cadetblue;
+    background-color: white;
+}
+
+
+@media only screen and (max-width:600px){
+    .usernav{
+    
+        display: none;
+    }
+}
