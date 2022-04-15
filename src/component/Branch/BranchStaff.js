@@ -21,13 +21,13 @@ const BranchStaff = () => {
     const [username, setusername] = useState([])
 
     useEffect(() => {
-        Axios.get("http://localhost:8000/bloggedin", { headers: { 'authorization': getToken } })
+        Axios.get("https://node-knz.herokuapp.com/bloggedin", { headers: { 'authorization': getToken } })
             .then((res) => {
                 console.log('bst bnm is', res.data.userValid.branchname);
                 setbranchname(res.data.userValid.branchname);
                 setusername(res.data.userValid.username);
                 const branchname = res.data.userValid.branchname
-                Axios.get(`http://localhost:8000/branchparceldata/${branchname}`)
+                Axios.get(`https://node-knz.herokuapp.com/branchparceldata/${branchname}`)
                     .then((res) => {
                         console.log('stf data', res.data.stfdata);
                         setdata(res.data.stfdata);
@@ -49,9 +49,9 @@ const BranchStaff = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        Axios.delete(`http://localhost:8000/deleteStaffData/${id}`)
+                        Axios.delete(`https://node-knz.herokuapp.com/deleteStaffData/${id}`)
                             .then((res) => {
-                                Axios.get(`http://localhost:8000/branchparceldata/${branchname}`)
+                                Axios.get(`https://node-knz.herokuapp.com/branchparceldata/${branchname}`)
                                     .then((res) => {
                                         setdata(res.data.stfdata);
                                     })

@@ -10,7 +10,7 @@ const R1 = () => {
     const [data, setdata] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:8000/comment")
+    Axios.get("https://node-knz.herokuapp.com/comment")
       .then((res) => {
         // var temp=[]
         // for(var i = 0; i < 4 ; i++){

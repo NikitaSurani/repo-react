@@ -12,7 +12,7 @@ const Aboutus = () => {
     const [Data, SetData] = useState([]);
 
     useEffect(() => {
-        Axios.get("http://localhost:8000/branchinfo")
+        Axios.get("https://node-knz.herokuapp.com/branchinfo")
             .then((res) => {
                 SetData(res.data.branchData);
             })

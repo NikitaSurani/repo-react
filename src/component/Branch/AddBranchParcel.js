@@ -40,13 +40,13 @@ const AddBranchParcel = () => {
 
   useEffect(() => {
     if (getToken) {
-      Axios.get("http://localhost:8000/bloggedin", { headers: { 'authorization': getToken } })
+      Axios.get("https://node-knz.herokuapp.com/bloggedin", { headers: { 'authorization': getToken } })
         .then((res) => {
 
           setusername(res.data.userValid.username);
           setbranchname(res.data.userValid.branchname);
           const branchname = res.data.userValid.branchname;
-          Axios.get("http://localhost:8000/branchinfo")
+          Axios.get("https://node-knz.herokuapp.com/branchinfo")
             .then((res) => {
               const fdata = res.data.branchData;
               // console.log("log data",fdata);
@@ -86,16 +86,16 @@ const AddBranchParcel = () => {
     const route = data.route;
     let rprice;
     if (route == "By Road") {
-      rprice = 20;
+      rprice = 100;
     }
     else if (route == "By Air") {
-      rprice = 50;
+      rprice = 300;
     }
     else if (route == "By Train") {
-      rprice = 30;
+      rprice =190;
     }
     else if (route == "By Ship") {
-      rprice = 40;
+      rprice = 200;
     }
     else {
       rprice = 0;
@@ -113,7 +113,7 @@ const AddBranchParcel = () => {
       referancenumber, sendername, receivername, senderaddress, receiveraddress, sendercontactnumber,
       receivercontactnumber, senderemail, receiveremail, sendercity, receivercity, branchprocessed, pickupbranch, weight, height, width, route, price
     }
-    Axios.post("http://localhost:8000/addparcel", parceldata)
+    Axios.post("https://node-knz.herokuapp.com/addparcel", parceldata)
       .then((res) => {
         if (res.status === 200) {
           toast.success("Data Added Successfully..", { autoClose: 1000 }

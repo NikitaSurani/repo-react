@@ -24,7 +24,7 @@ const ForgotPassword = () => {
             result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
         }
         const data = { email, result, username }
-        Axios.post("http://localhost:8000/sendotp", data)
+        Axios.post("https://node-knz.herokuapp.com/sendotp", data)
             .then((res) => {
                 if (res.status === 200) {
                     toast.success("OTP Send Successfully..", { autoClose: 1000 }
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
     }
     const Verifyotp = (e) => {
         e.preventDefault();
-        Axios.post("http://localhost:8000/verifyotp", { username, otp, email })
+        Axios.post("https://node-knz.herokuapp.com/verifyotp", { username, otp, email })
             .then((res) => {
                 if (res.status === 200) {
                     navigate('/staffhome');

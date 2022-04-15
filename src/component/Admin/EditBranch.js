@@ -36,7 +36,7 @@ const EditBranch = () => {
       
       useEffect(()=>{
         
-        Axios.get(`http://localhost:8000/editdata/${id}`)
+        Axios.get(`https://node-knz.herokuapp.com/editdata/${id}`)
         .then((res)=>{
             console.log("data:",res.data.editData)
            setUser(res.data.editData)

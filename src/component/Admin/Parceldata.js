@@ -25,10 +25,10 @@ const Parceldata = () => {
     const [username,setusername]=useState()
 
     useEffect(() => {
-        Axios.get("http://localhost:8000/loggedin", { headers: { 'authorization': getToken } })
+        Axios.get("https://node-knz.herokuapp.com/loggedin", { headers: { 'authorization': getToken } })
             .then((res) => {
                 setusername(res.data.userValid.username);
-                Axios.get("http://localhost:8000/parcelinfo")
+                Axios.get("https://node-knz.herokuapp.com/parcelinfo")
                     .then((res) => {
                         SetData(res.data.ParcelData);
                     })
@@ -44,9 +44,9 @@ const Parceldata = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        Axios.delete(`http://localhost:8000/deleteparceldata/${id}`)
+                        Axios.delete(`https://node-knz.herokuapp.com/deleteparceldata/${id}`)
                             .then((res) => {
-                                Axios.get("http://localhost:8000/parcelinfo")
+                                Axios.get("https://node-knz.herokuapp.com/parcelinfo")
                                     .then((res) => {
                                         SetData(res.data.ParcelData);
                                     })
@@ -70,9 +70,9 @@ const Parceldata = () => {
     const editstus = (e, id) => {
         const pstatus = { parcelstatus };
         console.log("It Clicked", pstatus);
-        Axios.put(`http://localhost:8000/updateparcelstatus/${id}`, pstatus)
+        Axios.put(`https://node-knz.herokuapp.com/updateparcelstatus/${id}`, pstatus)
             .then((res) => {
-                Axios.get("http://localhost:8000/parcelinfo")
+                Axios.get("https://node-knz.herokuapp.com/parcelinfo")
                     .then((res) => {
                         SetData(res.data.ParcelData);
                     })

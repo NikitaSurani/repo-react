@@ -41,11 +41,11 @@ const SuratDetails = () => {
 
     useEffect(() => {
         if (getToken) {
-            Axios.get("http://localhost:8000/loggedin", { headers: { 'authorization': getToken } })
+            Axios.get("https://node-knz.herokuapp.com/loggedin", { headers: { 'authorization': getToken } })
                 .then((res) => {
                     console.log('first res', res.data.userValid);
                     setuser(res.data.userValid.username);
-                    Axios.get(`http://localhost:8000/branchdata/${bnm}`)
+                    Axios.get(`https://node-knz.herokuapp.com/branchdata/${bnm}`)
                         .then((res) => {
                             console.log(res.data.branchdata);
                             settotalstaff(res.data.totalstaff)
@@ -68,7 +68,7 @@ const SuratDetails = () => {
     const handelshow = (e) => {
         setstaffshow(" ");
         e.preventDefault();
-        Axios.get(`http://localhost:8000/branchdata/${bnm}`)
+        Axios.get(`https://node-knz.herokuapp.com/branchdata/${bnm}`)
             .then((res) => {
                 if (res.status === 200) {
                     console.log('parcel data are ', res.data.prdata);
@@ -99,7 +99,7 @@ const SuratDetails = () => {
     const handelstaff = (e) => {
         e.preventDefault();
         setshow(" ");
-        Axios.get(`http://localhost:8000/branchdata/${bnm}`)
+        Axios.get(`https://node-knz.herokuapp.com/branchdata/${bnm}`)
             .then((res) => {
                 if (res.status === 200) {
                     // setpdata(res.data.prdata)

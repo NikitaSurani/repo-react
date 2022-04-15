@@ -21,13 +21,13 @@ const StaffInfo = () => {
     const [total,settotal]=useState();
     useEffect(() => {
         if (getstaffToken) {
-            Axios.get("http://localhost:8000/sloggedin", {
+            Axios.get("https://node-knz.herokuapp.com/sloggedin", {
                 headers: { authorization: getstaffToken },
             }).then((res) => {
                 setusername(res.data.userValid.username);
                 const username = res.data.userValid.username;
                 const staffname=res.data.userValid.staffname;
-                Axios.get(`http://localhost:8000/staffnotification/${staffname}`)
+                Axios.get(`https://node-knz.herokuapp.com/staffnotification/${staffname}`)
                 .then((res)=>{
                         settotal(res.data.countnotify);
                 })

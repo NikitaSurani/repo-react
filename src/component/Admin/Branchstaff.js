@@ -22,10 +22,10 @@ const Branchstaff = () => {
     const [username,setusername]=useState();
 
     useEffect(() => {
-        Axios.get("http://localhost:8000/loggedin", { headers: { 'authorization': getToken } })
+        Axios.get("https://node-knz.herokuapp.com/loggedin", { headers: { 'authorization': getToken } })
             .then((res) => {
                 setusername(res.data.userValid.username);
-                Axios.get("http://localhost:8000/staffinfo")
+                Axios.get("https://node-knz.herokuapp.com/staffinfo")
                     .then((res) => {
                         SetData(res.data.staffData);
                     })
@@ -40,9 +40,9 @@ const Branchstaff = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        Axios.delete(`http://localhost:8000/deleteStaffData/${id}`)
+                        Axios.delete(`https://node-knz.herokuapp.com/deleteStaffData/${id}`)
                             .then((res) => {
-                                Axios.get("http://localhost:8000/staffinfo")
+                                Axios.get("https://node-knz.herokuapp.com/staffinfo")
                                     .then((res) => {
                                         SetData(res.data.staffData);
                                     })

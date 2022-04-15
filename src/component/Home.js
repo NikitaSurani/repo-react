@@ -15,7 +15,7 @@ const Home = () => {
 
     useEffect(() => {
         if (getToken) {
-            Axios.get("http://localhost:8000/aloggin", { headers: { 'authorization': getToken } })
+            Axios.get("https://node-knz.herokuapp.com/aloggin", { headers: { 'authorization': getToken } })
                 .then((res) => {
                     const data = res.data.data;
                     if (data.type === "admin") {

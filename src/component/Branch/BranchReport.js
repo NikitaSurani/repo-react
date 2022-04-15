@@ -43,12 +43,12 @@ const BranchReport = () => {
     useEffect(() => {
         if (getToken) {
             setbdate(" ")
-            Axios.get("http://localhost:8000/bloggedin", { headers: { 'authorization': getToken } })
+            Axios.get("https://node-knz.herokuapp.com/bloggedin", { headers: { 'authorization': getToken } })
                 .then((res) => {
                     setusername(res.data.userValid.username);
                     setbranchname(res.data.userValid.branchname);
                     const branchname = res.data.userValid.branchname;
-                    Axios.get(`http://localhost:8000/branchparceldata/${branchname}`)
+                    Axios.get(`https://node-knz.herokuapp.com/branchparceldata/${branchname}`)
                         .then((res) => {
                             console.log('stf data', res.data.stfdata);
                             setstaffname(res.data.stfdata);
@@ -68,7 +68,7 @@ const BranchReport = () => {
         setbranchshow(" ");
         const staffname = info;
 
-        Axios.get(`http://localhost:8000/staffreport/${staffname}`)
+        Axios.get(`https://node-knz.herokuapp.com/staffreport/${staffname}`)
             .then((res) => {
                 if (res.status === 200) {
                     Setshow("show");
@@ -88,7 +88,7 @@ const BranchReport = () => {
         Setshow(" ");
         const branchname = rbranchname;
         const pstatus = parcelstatus
-        Axios.get(`http://localhost:8000/branchparcelreport/${branchname}/${pstatus}/${bdate}/${btodate}`,)
+        Axios.get(`https://node-knz.herokuapp.com/branchparcelreport/${branchname}/${pstatus}/${bdate}/${btodate}`,)
             .then((res) => {
                 if (bdate) {
 
@@ -194,10 +194,10 @@ const BranchReport = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-2">
-                                    <input className='date1' type="date" value={bdate} onChange={(e) => setbdate(e.target.value)} />
+                                   From : <input className='date1' type="date" value={bdate} onChange={(e) => setbdate(e.target.value)} />
                                 </div>
                                 <div className="col-md-2">
-                                    <input className='date1' type="date" value={btodate} onChange={(e) => settobdate(e.target.value)} />
+                                   To : <input className='date1' type="date" value={btodate} onChange={(e) => settobdate(e.target.value)} />
                                 </div>
                                 <div className="col-md-2">
                                     <button className='rbtn' onClick={handlebranchsearch}>
@@ -231,10 +231,10 @@ const BranchReport = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-2">
-                                    <input className='date1' type="date" value={sdate} onChange={(e) => setdate(e.target.value)} />
+                                   From : <input className='date1' type="date" value={sdate} onChange={(e) => setdate(e.target.value)} />
                                 </div>
                                 <div className="col-md-2">
-                                    <input className='date1' type="date" value={stodate} onChange={(e) => settosdate(e.target.value)} />
+                                    To : <input className='date1' type="date" value={stodate} onChange={(e) => settosdate(e.target.value)} />
                                 </div>
                                 <div className="col-md-2">
                                     <button className='rbtn' onClick={hendlesearch}>
@@ -262,10 +262,12 @@ const BranchReport = () => {
                                             <th scope="col">Sender Email</th>
                                             <th scope='col'>Receiver Email</th>
                                             <th scope='col'>Parcel Status</th>
+                                            <th scope='col'>Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {///branch
+
                                             (rdata ? rdata : " ").map((i) => (
                                                 <>
 
@@ -286,46 +288,68 @@ const BranchReport = () => {
                                                                 </tr>
 
                                                             ) : ""
-                                                        ) : (
+                                                        ) : parcelstatus == "Delivered"?(
+                                                            moment(i.deliverydate).format('L') >= branchcalenderdt && moment(i.deliverydate).format('L') <= claenderbtodate ? (
+                                                                rcount = rcount + 1,
 
-                                                            rcount = rcount + 1,
+                                                                <tr key={i._id} className='tbltr'>
+                                                                    <td>{i.referancenumber}</td>
+                                                                    {/* <td>{i.sendername}</td> */}
+                                                                    <td>{i.receivername}</td>
+                                                                    <td>{i.senderemail}</td>
+                                                                    <td>{i.receiveremail}</td>
+                                                                    <td>{i.mainparcelstatus}</td>
+                                                                    <td>{moment(i.deliverydate).format('L')}</td>
 
-                                                            <tr key={i._id} className='tbltr'>
-                                                                <td>{i.referancenumber}</td>
-                                                                {/* <td>{i.sendername}</td> */}
-                                                                <td>{i.receivername}</td>
-                                                                <td>{i.senderemail}</td>
-                                                                <td>{i.receiveremail}</td>
-                                                                <td>{parcelstatus}</td>
-                                                                <td>{moment(i.receivedate).format('L')}</td>
+                                                                </tr>
 
-                                                            </tr>
+                                                            ) : ""
+                                                        ):parcelstatus == "Received"?(
+                                                            moment(i.receivedate).format('L') >= branchcalenderdt && moment(i.receivedate).format('L') <= claenderbtodate ? (
+                                                                rcount = rcount + 1,
+
+                                                                <tr key={i._id} className='tbltr'>
+                                                                    <td>{i.referancenumber}</td>
+                                                                    {/* <td>{i.sendername}</td> */}
+                                                                    <td>{i.receivername}</td>
+                                                                    <td>{i.senderemail}</td>
+                                                                    <td>{i.receiveremail}</td>
+                                                                    <td>{i.parcelstatus}</td>
+                                                                    <td>{moment(i.receivedate).format('L')}</td>
+
+                                                                </tr>
+
+                                                            ) : ""
+                                                        ):parcelstatus == "Delivered By Staff"?(
+                                                            moment(i.deliverydate).format('L') >= branchcalenderdt && moment(i.deliverydate).format('L') <= claenderbtodate ? (
+                                                                rcount = rcount + 1,
+
+                                                                <tr key={i._id} className='tbltr'>
+                                                                    <td>{i.referancenumber}</td>
+                                                                    {/* <td>{i.sendername}</td> */}
+                                                                    <td>{i.receivername}</td>
+                                                                    <td>{i.senderemail}</td>
+                                                                    <td>{i.receiveremail}</td>
+                                                                    <td>{i.branchparcelstatus}</td>
+                                                                    <td>{moment(i.deliverydate).format('L')}</td>
+
+                                                                </tr>
+
+                                                            ) : ""
+                                                        ):" "
+
+                                                        
 
 
-                                                        )
+                                                        
                                                     }
                                                 </>
                                             ))
+
+
                                         }
 
-                                        {/* {
-                                            (rdata && parcelstatus == "Delivered" || parcelstatus == "Received" || parcelstatus == "Delivered By Staff" ? rdata : "").map((item) => (
-                                                item.receivedate == branchcalenderdt ? (
-                                                    dcount = dcount + 1,
-                                                    console.log("dcount", dcount),
-                                                    <tr key={item._id}>
-                                                        <td>{item.referancenumber}</td>
-                                                        
-                                                        <td>{item.receivername}</td>
-                                                        <td>{item.senderemail}</td>
-                                                        <td>{item.receiveremail}</td>
-                                                        <td>{item.parcelstatus}</td>
-                                                    </tr>
-
-                                                ) : ""
-                                            ))
-                                        } */}
-
+                                       
                                     </tbody>
 
                                 </table>

@@ -20,7 +20,7 @@ const TrackParcel = () => {
 
     useEffect(() => {
         if (getToken) {
-            Axios.get("http://localhost:8000/loggedin", { headers: { 'authorization': getToken } })
+            Axios.get("https://node-knz.herokuapp.com/loggedin", { headers: { 'authorization': getToken } })
                 .then((res) => {
                     setusername(res.data.userValid.username);
                 })
@@ -30,7 +30,7 @@ const TrackParcel = () => {
     const handlesearch = (e) => {
         e.preventDefault();
         const referancenumber = ref;
-        Axios.get(`http://localhost:8000/parcedata/${referancenumber}`)
+        Axios.get(`https://node-knz.herokuapp.com/parcedata/${referancenumber}`)
             .then((res) => {
                 if (res.status === 200) {
                     Setshow("show");

@@ -75,7 +75,7 @@ const Branchinfo = () => {
 
     useEffect(() => {
         if (getToken) {
-            Axios.get("http://localhost:8000/bloggedin", { headers: { 'authorization': getToken } })
+            Axios.get("https://node-knz.herokuapp.com/bloggedin", { headers: { 'authorization': getToken } })
                 .then((res) => {
                     // console.log('first res', res.data);
                     // setuser(res.data.userValid.username);
@@ -84,7 +84,7 @@ const Branchinfo = () => {
                     console.log("login successfully");
                     setbranchname(res.data.userValid.branchname)
                     const branchname = res.data.userValid.branchname
-                    Axios.get(`http://localhost:8000/notificationdata/${branchname}`)
+                    Axios.get(`https://node-knz.herokuapp.com/notificationdata/${branchname}`)
                         .then((res) => {
                             console.log("total:", res.data.total);
 
@@ -110,7 +110,7 @@ const Branchinfo = () => {
 
                         }
                         )
-                    Axios.get(`http://localhost:8000/branchparceldata/${branchname}`)
+                    Axios.get(`https://node-knz.herokuapp.com/branchparceldata/${branchname}`)
                         .then((res) => {
                             // console.log(res.data.tparcel);
                             setinfo({
@@ -162,10 +162,10 @@ const Branchinfo = () => {
     const clearnotify = () => {
 
         var branchnm = branchnames
-        Axios.put(`http://localhost:8000/updateflag/${branchnm}`)
+        Axios.put(`https://node-knz.herokuapp.com/updateflag/${branchnm}`)
             .then((res) => {
                 const branchname = branchnames
-                Axios.get(`http://localhost:8000/notificationdata/${branchname}`)
+                Axios.get(`https://node-knz.herokuapp.com/notificationdata/${branchname}`)
                     .then((res) => {
                         console.log("total dataaa:", res.data.total);
 

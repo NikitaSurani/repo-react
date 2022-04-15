@@ -33,7 +33,7 @@ const Addparcel = () => {
 
   const [bdata, setbdata] = useState([]);
   useEffect(() => {
-    Axios.get("http://localhost:8000/branchinfo")
+    Axios.get("https://node-knz.herokuapp.com/branchinfo")
       .then((res) => {
         const fdata = res.data.branchData;
         setbdata(fdata);
@@ -101,7 +101,7 @@ const Addparcel = () => {
       referancenumber, sendername, receivername, senderaddress, receiveraddress, sendercontactnumber,
       receivercontactnumber, senderemail, receiveremail, sendercity, receivercity, branchprocessed, pickupbranch, weight, height, width, route, price
     }
-    Axios.post("http://localhost:8000/addparcel", parceldata)
+    Axios.post("https://node-knz.herokuapp.com/addparcel", parceldata)
       .then((res) => {
         if (res.status === 200) {
           toast.success("Data Added Successfully..", { autoClose: 1000 }

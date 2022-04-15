@@ -34,7 +34,7 @@ const Addbranch = () => {
         e.preventDefault();
         const { branchname, branchaddress, branchcontactnumber, branchemail, city, zipcode } = user;
         const branchdata = { branchname, branchaddress, branchcontactnumber, branchemail, city, zipcode }
-        Axios.post("http://localhost:8000/addbranch", branchdata)
+        Axios.post("https://node-knz.herokuapp.com/addbranch", branchdata)
             .then((res) => {
                 if (res.status === 200) {
                     toast.success("Data Added Successfully..", { autoClose: 1000 }
@@ -67,7 +67,7 @@ const Addbranch = () => {
 
     useEffect(() => {
         if (id) {
-            Axios.get(`http://localhost:8000/editdata/${id}`)
+            Axios.get(`https://node-knz.herokuapp.com/editdata/${id}`)
                 .then((res) => {
                     console.log("data:", res.data.editData)
                     setUser(res.data.editData)
@@ -79,7 +79,7 @@ const Addbranch = () => {
         e.preventDefault();
         const { branchname, branchaddress, branchcontactnumber, branchemail, city, zipcode } = user;
         const branchdata = { branchname, branchaddress, branchcontactnumber, branchemail, city, zipcode };
-        Axios.put(`http://localhost:8000/updateBranchData/${id}`, branchdata)
+        Axios.put(`https://node-knz.herokuapp.com/updateBranchData/${id}`, branchdata)
             .then((res) => {
                 if (res.status === 200) {
                     toast.success("Updated Successfully..", { autoClose: 1000 }

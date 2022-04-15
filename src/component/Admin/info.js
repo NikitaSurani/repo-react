@@ -61,11 +61,11 @@ const Info = () => {
 
     useEffect(() => {
         if (getToken) {
-            Axios.get("http://localhost:8000/loggedin", { headers: { 'authorization': getToken } })
+            Axios.get("https://node-knz.herokuapp.com/loggedin", { headers: { 'authorization': getToken } })
                 .then((res) => {
                     console.log('first res', res.data.userValid.username);
                     setuser(res.data.userValid.username);
-                    Axios.get("http://localhost:8000/showdata")
+                    Axios.get("https://node-knz.herokuapp.com/showdata")
                         .then((res) => {
                             setdata({
                                 totalbranch: res.data.totalbranch,

@@ -80,7 +80,7 @@ const Usertrackparcel = () => {
             setcaptcha("");
             const referancenumber = ref;
             
-            Axios.get(`${process.env.REACT_APP_BASE_URL}/trackparcel/${referancenumber}`)
+            Axios.get(`https://node-knz.herokuapp.com/trackparcel/${referancenumber}`)
                 .then((res) => {
                     if (res.status === 200) {
                         Setshow("show");
